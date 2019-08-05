@@ -1,0 +1,214 @@
+<html>
+<head>
+
+<title>Joe's Greenhouse Temperature Monitor</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="greenhouse_chart.js"></script>
+
+<script type="text/javascript">
+  function startTimer() {
+    var now = new Date();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    var dsec = (((15 - (minutes % 15) - ((seconds>0)?1:0)) * 60) + (60 - seconds)) + 30;
+    var min_until = ~~(dsec/60);
+    var sec_until = ~~(dsec - min_until*60);
+   
+    var astr="Initial minutes to refresh: " + min_until + ":" + sec_until;
+    //alert(astr);
+    setTimeout('refresh()', dsec*1000);
+    
+}
+
+function refresh() {
+   window.location.reload(true);
+}
+
+startTimer();
+</script>
+
+<script type="text/javascript">
+  var chart;
+
+  var firstTime;
+  var lastTime;
+  var temperatureData;
+  var powerData;
+
+  $('#container').ready(function() {
+     chart = load_greenhouse_chart();
+     //initdata();
+
+     $.when($.ajax("data.txt"),
+            $.ajax("power.dat"))
+         .then(
+            function(resp1, resp2)
+            {
+               temperatureData = resp1[0];
+               powerData = resp2[0];
+               processData();
+            }, 
+            function(err1)
+            {
+               alert("Failed to load data.  Check JS log for more details");
+               console.log(err1.responseText); 
+            }
+         );
+  });
+
+
+  function processData()
+  {
+     // processTemperature must come first to
+     // set the x-domain for the graph
+     processTemperatureData();
+     //processPowerData();
+     chart.redraw();
+  }
+
+  function initdata()
+  {
+     chart.series[0].setData([[1361419400000, 13], [1361420930000, 15]] );
+     chart.series[1].setData([[1361419500000, 22]] );
+     chart.series[2].setData([[1361439500000, 20]] );
+     chart.series[3].setData([[1361439500000, 20]] );
+  }
+
+  function processTemperatureData()
+  {
+     var data0 = [];
+     var data1 = [];
+     var data2 = [];
+
+      // These are global so readPowerData can access them.
+     firstTimeGreenhouse = 0;
+     lastTimeGreenhouse = 0;
+
+     lines = temperatureData.split("\n");
+     for (i=0; i<lines.length-1; i++)
+     {
+        line = lines[i];
+        fields = line.split(" ");
+        
+        timeMsOutside = parseFloat(fields[0])*1000;
+        timeMsGreenhouse = parseFloat(fields[2])*1000;
+        if (firstTimeGreenhouse == 0)
+           firstTimeGreenhouse = timeMsGreenhouse;
+        lastTimeGreenhouse = timeMsGreenhouse;
+
+        tempOutside = parseFloat(fields[1]*9.0/5.0+32);
+        tempGreenhouse = parseFloat(fields[3]*9.0/5.0+32);
+        tempDiff = parseFloat(tempGreenhouse-tempOutside);
+
+        data0.push([timeMsGreenhouse, tempGreenhouse]);
+        // if the web server can't be reached, the
+        // timestamp will be set to 0.
+
+        if(timeMsOutside > 0)
+        {
+            data1.push([timeMsOutside, tempOutside]);
+            // This is not exact (timeMsOutside depends on web query)
+            data2.push([timeMsGreenhouse, tempDiff]);
+        }
+
+     }
+
+     chart.series[0].setData(data0);
+     chart.series[1].setData(data1);
+     chart.series[2].setData(data2);
+
+     var firstTimeStr = formatDate(new Date(firstTimeGreenhouse));
+     var lastTimeStr = formatDate(new Date(lastTimeGreenhouse));
+
+     subtitle = firstTimeStr + " to " + lastTimeStr;
+
+     chart.setTitle(null, { text: subtitle });
+  }
+
+  function processPowerData()
+  {
+     var data3 = [];
+
+     var prevKwh = -1;
+     var prevTimeMs = -1;
+
+     lines = powerData.split("\n");
+     for (i=0; i<lines.length-1; i++)
+     {
+        line = lines[i];
+        fields = line.split(" ");
+
+        var timeMs = Date.parse(fields[0]);
+        // 8am, + 6 hours due to CDT vs GMT
+        timeMs = timeMs + (8+6)*60*60*1000;
+
+        //alert("txt: " + fields[0] + ", timeMs = " + timeMs);
+
+        kwh = fields[1];
+        if (prevKwh != -1)
+        {
+           tdiff = timeMs - prevTimeMs;
+           kwdiff = kwh - prevKwh; 
+
+           // ms -> s -> m -> h -> d
+           days = tdiff / 1000 / 60 / 60 / 24;
+           kwpd = (kwdiff/days);
+           kwpd = Math.round(kwpd*10)/10;
+
+           // this comes from readdata function, which
+           // we call first
+           if (timeMs >= firstTime &&
+              timeMs <= lastTime)
+           {
+              data3.push([timeMs, kwpd]);
+           }
+           //alert(fields[0] + ": f/l/this: " + firstTime + ", " + lastTime + ", " + timeMs);
+        }
+
+        prevKwh = kwh;
+        prevTimeMs = timeMs;  
+     }
+     chart.series[3].setData(data3);
+  }
+
+  function formatDate(d)
+  {
+     var year    = d.getFullYear(); 
+     var month   = zfill(d.getMonth()+1, 2);
+     var day     = zfill(d.getDate(), 2);
+     var hours   = d.getHours();
+     var minutes = zfill(d.getMinutes(), 2);
+     var seconds = zfill(d.getSeconds(), 2);
+
+     var tz = d.getTimezoneOffset()/60;
+
+     if (tz > 0)
+        tz = "+" + tz;
+
+     var output = year + "-" + month + "-" + day + " " +
+                  hours + ":" + minutes;
+
+     return output;
+  }
+
+  function zfill(num, length)
+  {
+     number = num.toString();
+
+     while (number.length < length)
+        number = "0" + number;
+
+     return number;
+  }
+
+</script>
+
+</head>
+<body>
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+</body>
+</html>

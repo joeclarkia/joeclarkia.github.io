@@ -1,0 +1,24 @@
+<?xml:namespace ns="rn" prefix="rn"?>
+<smil>
+	<head>
+		<meta name="title" content="Crazy Joe" />
+		<meta name="author" content="Joe Clark" />
+		<meta name="copyright" content="©2001" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="robots" content="all" />
+		<layout type="text/smil-basic-layout">
+			<root-layout width="512" height="384" background-color="black"/>
+			<region id="pix_region" left="0" top="0" width="512" height="384" z-index="1" />
+		</layout>
+	</head>
+	<body>
+		<par>
+			<seq>
+				<img src="crazyjoe.rp" region="pix_region" fill="freeze"/> 
+			</seq>
+			<audio src="crazyjoe.rm"/>
+		</par>
+	</body>
+</smil>
+

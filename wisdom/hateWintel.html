@@ -1,0 +1,242 @@
+<HTML>
+<!--This file created 12/30/99 2:53 PM by Claris Home Page version 3.0-->
+<HEAD>
+   <TITLE>Why I Hate Wintel</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 3.0">
+   <X-CLARIS-WINDOW TOP=42 BOTTOM=469 LEFT=4 RIGHT=534>
+   <X-CLARIS-TAGVIEW MODE=minimal>
+</HEAD>
+<BODY TEXT="#CCFFFF" BGCOLOR="#0000FF">
+<H3>Why I Hate Wintel</H3>
+
+<P><STRONG>12/30/99</STRONG>
+
+<P>So I bought a new computer recently. I had ordered several
+packages to go with the computer, and as it turned out the computer
+arrived first. So to begin with I had only the basic CPU and a Red
+Hat Linux install CD.
+
+<P>The first thing I noticed was that the Linux CD would not boot...I
+figured it was just the wrong format or that the CD writer had not
+been set up properly -- however later I observed that it seemed to be
+a problem with the CPU's internal L1 cache -- when it's enabled, the
+RH CD will not boot, but it will when disabled. The Win NT CD will
+boot either way, however.
+
+<P>So lacking Red Hat power, I proceeded to install DOS and then Win
+3.1 on the HD. The installs were mostly happy, except that there were
+random lockups at times, and to start with Windows would lock up when
+I move the mouse pointer to the left or top of the screen (after
+turning the picture upside down)...this problem eventually went away,
+however (for no apparent reason). The only problems I did have were
+the occasional corruption of one of the program groups (again for no
+apparent reason).
+
+<P>With DOS installed, I proceeded to mount the Red Hat CD, make a
+Linux startup floppy, and try that out...Of course it didn't work --
+gave an error about trying to delete the idle process (pid 0). So I
+went about setting up the modem using Win 3.1. After a good deal of
+jumper messing, I got it installed and working (although, for
+whatever reason, the 56k modem took a stupidly long time to connect
+-- 45 seconds or so, whereas my Mac 28.8 modem connects in about 10
+seconds). Also, I was never able to get 56k speeds, or anything
+close, but that may have been due to my phone lines.
+
+<P>Later that day, I talked to knowledgeable folks about my Linux
+problems, and they suggested creating a new startup floppy (because
+the original could have been defective). So I used the Mac's Disk
+Copy utility to make a copy. It found no errors on the original, and
+created the copy. Then, to my utmost surprise, this second floppy did
+indeed start up happily -- why two supposedly identical disks could
+behave differently was a mystery. However, after much more messing
+around (which I'll get to eventually), I determined that Linux, or
+perhaps my CPU in general, has a motto of "If it doesn't work, wait
+and try again." I now believe the reason the first floppy didn't work
+was that I didn't shut down the computer completely and then restart
+from scratch....while copying the second disk, I had the Wintel
+computer shut off, and it had it's necessary downtime to reset
+whatever needed to be reset internally (as we shall see, this
+question of when the computer is actually starting fresh is one of
+the most randomizing problems I've dealt with).
+
+<P>So I proceeded to attempt a Linux install. The machine hung itself
+a few times during the install (first graphical, then text-based),
+but eventually I did get a successful Linux install. It started up
+all right, and booted me into the Gnome logon (since I had told it to
+do that automatically). This worked, and in general Linux was a happy
+experience. However, to start with, it started X in VGA (16-color)
+mode, which made graphics look horrible and made Netscape almost
+unusable and full of error messages. Also, I would at times get
+random hangs from the system -- usually vertical lines on the screen,
+often having a color similar to whatever was on the screen currently.
+After some playing with the Xconfigurator, I got a 1024 x 768
+resolution to work -- fixing the color problems and noticeably
+speeding up the OS. I really would have preferred 800 x 600
+resolution, but I could not get the monitor/card/CPU to sync at that
+rate. Even at 1024 x 768, I still had (infrequent) lockups, this time
+usually with diagonal lines across the screen, instead of vertical.
+Also the logout command always caused the screen to hang immediately,
+so the X server had to be killed with the ctrl-alt-backspace key
+combo. Finally, the mouse pointer in 1024 x 768 mode turned into a
+large, mostly black square (about the size of Netscape's "Back"
+button), with the real cursor in the top left of this box. ... Upon
+restart from a system crash, FSCK would always report that deleted
+inode 749900 had zero d_time, and usually this was the only error
+found (I have no idea what the significance of that is, but I give it
+in case someone else knows about it). But, in general, the system was
+functional and happy.
+
+<P>A few days later, I received my copy of Windows NT. Oh happy -- or
+so I thought. I set about installing it, and ran into the first of
+many problems. First of all, NT didn't like the way my partitions
+were set up, and I eventually had to delete my Linux setup to get it
+to work (which I didn't mind, since I hadn't customized it too much).
+As expected NT setup overwrote the HD master boot record (MBR) with
+it's own startup code (replacing Lilo from Linux). The problem is, it
+didn't do it correctly, so it only CORRUPTED the MBR, and the HD
+would hang with "LI" displayed (evidently some remnant of the LILO
+prompt). I wiped all partitions from the disk, returning it to a
+state of what I thought it was when I first started it up, but still
+the "LI" remained. After more knowledgeable assistance, I discovered
+the command fdisk /mbr, which wipes out the MBR. I used NT's setup to
+create 3 disk partitions for NT (500 MB NTFS system, 2047 MB FAT, and
+2047 MB NTFS for programs), and later used its graphical program to
+create an extended DOS partition, which I intended to install Linux
+on later. One evil thing about NT: It only recognized my HD as 8064
+MB, instead of ~10 GB, which it actually is. It seems that only
+Linux, the poor-man's public use FREE OS, is able to correctly
+address my (not so) large disk drive. Just great!
+
+<P>Anyway, after a couple install attempts, the "text-based" NT
+install completed, and I restarted into the graphical interface, only
+to find that the graphical setup stopped in Phase 0 with a message
+that the internal setup data structures were corrupted. I was baffled
+by this for a while. I restarted a few times, and (to my utmost
+surprise again) after awhile the message went away and setup
+continued. Stupid randomness! At this moment, I'm wondering if it
+didn't expect the CD-ROM to be in the drive, but that's a longshot
+for an explanation.
+
+<P>Setup took a while and a good deal of user interaction, but
+finally it was finished, and I restarted to find the familiar NT
+login prompt. Yeah!! It was a little slow, I thought, so I enabled
+the CPU's cache features, and speed improved dramatically...I
+proceeded to install Service Pack 4, then some programs and such, and
+then called it a night at about 5 a.m. (as I remember it, there was
+an error that seemed prevalent when I quit, but it didn't reappear
+after I got up the next day, so it was either a random error or
+another case of "if it doesn't work, wait awhile."
+
+<P>The next day, I received some dictation software by mail. I went
+about installing and customizing it, and at what seemed to be the
+very last step of customization, I got a stop message, something
+seeming to have to do with the NTFS system. I restarted as coldly as
+I thought I needed to, but the error remained. Now, dumb me, instead
+of following my principle of "wait awhile", I immediately grabbed my
+ERD (emergency repair disk) and set about "repairing" the
+installation. I noticed that a lot of files had apparently changed,
+and then remembered that it was probably undoing the effects of
+Service Pack 4 (SP4). I *thought* I had remade the ERD disk after
+installing SP4 -- so either I was wrong, or the NT setup programs is
+even stupider than I had thought. Either way, after "repairing" the
+installation, I started up, and got some random lockup problem. I did
+a more thorough repair, making sure to verify the system
+configuration, and this time it did start up, but it couldn't log me
+onto the system (error C00000DF). Later that day, I looked up the
+error, and found it to be an error with the security subsystem...it
+seemed to be related to reverting the SP4 system to the original NT 4
+setup...apparently some necessary part of the registry was not
+reverted as needed. I followed some online instructions about
+modifying the ERD (I modified it on a Mac, if that matters), and then
+reran setup as it instructed, and it did appear that the correct
+files were copied from the floppy. But, on restart, the logon process
+generated a stop code (incorrect termination of program -- 0x80).
+Some part of this evil problem still remained. I then tried a more
+troublesome fix, initially telling Windows to install over top of the
+old installation -- this worked for the text-based mode. When I got
+to the graphical mode, again I ran into the "corrupted Setup data
+structures" error msg, and again after a while it randomly went away.
+But this time graphical Setup did not complete -- it ran into the
+error "Cannot initialize security subsystem" -- apparently my
+security problems were unfixable. And don't you just love the
+descriptive error messages!!!
+
+<P>As a near-desparate effort, I attempted reinstalling NT in a
+companion directory (on the same partition), but this generated stop
+codes again, and I left it at that for the moment.
+
+<P>I then went back to attempting to install Linux. To my surprise
+(as mentioned before), with the internal CPU cache disabled, the RH
+CD would boot, but to begin with even the CD kernel crashed. This is
+when I abandoned most of my ideas about corrupt floppies and such
+causing crashes. I left the mess for a while, and when I tried again
+after restarting, surprisingly (but it was getting less and less
+surprising) it worked, and graphical setup started. But now Linux got
+stuck at the partitioning screen. It didn't like my extended DOS
+partition, so I deleted it (it was unused anyway). But I could not
+create the recommended partitions, because "the boot partition is too
+large". Now I tried resizing the supposed boot partition (/boot) down
+to 1 MB, but the error remained. I later learned (as I had remembered
+vaguely) that the Linux boot partition had to be within a certain
+amount of space on the HD physically -- any farther "up", and the
+booter in the MBR wouldn't recognize it. I tried creating other
+partitions, and sometimes they worked, sometimes they didn't (at
+times the error "not enough free space" would appear, but I believe
+that error message was in error). What annoyed me was that I could
+not change a partition from DOS/NT FS to Linux FS. If this had been
+possible, I could have used one of the 3 NT partitions as the Linux
+boot partition (possibly). But the RH installer would not allow that,
+and so I was stuck. I didn't actually try installing any further on
+one of the partitions it said it could create, because from what I
+can tell all the partition programs are evil and half the time don't
+know what they're talking about. NT and Linux and DOS all disagree.
+I've had a 500 MB hard drive, and 8 GB hard drive, and a 10 GB hard
+drive, depending on which program you believe.
+
+<P>So, now I have 2 installations of NT on my computer, neither of
+which will work, and no partition space available for Linux. In other
+words, in all this work, I have gained absolutely nothing, except for
+knowledge. Now I know why I've always liked Macs -- because they
+WORK. Sure, they crash, and the OS's memory architecture leaves
+something to be desired. BUT, when the Mac crashes, almost inevitably
+a restart fixes the problem. On this POJ Wintel box (POJ = Piece of
+Junk), a restart usually only confuses the human debugger, who thinks
+"I restarted, therefore the system should be returning to its
+original state" -- which is almost certainly NOT the case. I now
+understand why I've always heard folks talking about reformatting
+their hard drives every other week (or so it seems) -- because Wintel
+OSes, from my perspective, are evil and tend to corrupt things and
+make it very difficult to recover. One wrong move, and "bye bye OS."
+To top it all off, this apparently almost always means "bye bye data"
+as well, because application programs are tied into the OS through
+the registry, and Linux requires a partition reformat for
+installation.
+
+<P>Now, this setup process has taken entirely too much of my
+Christmas break -- it has sucked time out of my life. I expected it
+to take time, but I assumed it would be in _setup_, not in setup,
+repair, replace, debug, resetup, debug, resetup, and end up back
+where I started -- with a dead computer...450 MHz of worthless CPU.
+However, I have been in this debugging mode for less than a week, and
+I have already learned a lot. So the time is not completely wasted
+(just 95% so). Perhaps one day I will understand the great mysteries
+of Wintel and actually understand why my computer operates as it does
+-- I will cease to see errors as random and be able to associate them
+to a certain cause. At times, though, this debugging has seemed
+COMPLETELY random...which, I guess, is typical of debugging. But,
+until I start seeing the stable operating systems I expected to see,
+operating systems that are the leaders of the information revolution
+that I once believed they were -- I am going to continue my stance
+and say that "I HATE WINTEL."
+
+<P>- - - -
+
+<P>Your comments are welcomed and encouraged. If you are smart in
+these matters and can debug my problems, I would be very grateful for
+your help. If you are just a passerby or if you have your own horror
+stories, I would be interested to hear from you as well. Bon voyage,
+my noble computer users. Godspeed to your hard drives. Godspeed to
+your CPUs. And most of all, Godspeed to your OSes. We all know they
+need help from someone.
+</BODY>
+</HTML>

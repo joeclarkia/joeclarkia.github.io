@@ -1,0 +1,20 @@
+p = "<p><img width=500 src='http://joeclarkia.net/game-bekah/respiratory.jpg'>"
+
+lines = [
+["Nasal Concha", "What area warms the air when you breathe?"],
+["Sphenoidal sinus", "What is #1 in the picture below?" + p]
+
+// don't mess with anything below this line
+];
+
+
+
+
+
+questions=[];
+
+for (var i=0; i<lines.length; i++)
+{
+   parts = lines[i];
+   questions.push({"q": parts[1], "a": parts[0]});
+}

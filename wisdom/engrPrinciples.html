@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+   <TITLE>Joe's Engineering Principles</TITLE>
+</HEAD>
+<BODY TEXT="#CCCCCC" BGCOLOR="#003399">
+<CENTER><FONT SIZE="+2"><B><I>Joe's Engineering
+Principles</I></B></FONT>
+
+<P><FONT SIZE="-1">Joe Clark ~~ May 25, 2003 / Jan 23,
+2004</FONT></P></CENTER>
+
+<P>Okay, after being in the systems engineering world for a couple
+years now, I have begun to collect some opinions on how things are
+done. I would like to share them for you here. I will add to this
+list as I gain more experience.</P>
+
+<P><TABLE BORDER=1 WIDTH="100%">
+   <TR>
+      <TD WIDTH=206>
+         <P>Document Principles (1/23/04)</P>
+      </TD>
+      <TD>
+         <P><B><I>1) Every document needs a well-known "home"
+         filesystem location (what good is a document if you can't
+         find it).<BR>
+         2)&nbsp;In general, every piece of data needs to have a home
+         in a single well-defined document (redundant data is
+         inherently hard to keep up to date).</I></B></P>
+      </TD>
+   </TR>
+   <TR>
+      <TD WIDTH=206>
+         <P>Guess the Interface Principle</P>
+      </TD>
+      <TD>
+         <P><B><I>If part of the interface design is known, then
+         other related parts of the interface should also be known by
+         following common sense rules.</I></B></P>
+         
+         <P><B><I>Corollaries:</I></B></P>
+         
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+            <TR>
+               <TD WIDTH=138>
+                  <P>Common Prefix/Suffix Corollary</P>
+               </TD>
+               <TD>
+                  <P>When part of an interface uses a particular
+                  prefix or suffix, the entire interface should use
+                  that same prefix or suffix (where appropriate). Ex:
+                  examine errno.h. Each error identifier begins with
+                  "E".</P>
+               </TD>
+            </TR>
+            <TR>
+               <TD WIDTH=138>
+                  <P>Related Syntax Corollary</P>
+               </TD>
+               <TD>
+                  <P>When an interface consists of two or more items
+                  that are related (transmit and receive, for
+                  example), the same style should be used for all
+                  related items (ie, transmitData -&gt; receiveData,
+                  *NOT* rxData, *NOT* rx_data, *NOT* RxData)</P>
+               </TD>
+            </TR>
+            <TR>
+               <TD WIDTH=138>
+                  <P>Common Variable Style Corollary</P>
+               </TD>
+               <TD>
+                  <P>If some parts of an interface use a particular
+                  variable naming style, all parts of the interface
+                  should conform to the same style. Ex: if one
+                  variable is transmit_data, the matching function
+                  should be receive_data, *NOT* receiveData.</P>
+               </TD>
+            </TR>
+         </TABLE>
+         </P>
+      </TD>
+   </TR>
+   <TR>
+      <TD WIDTH=206>
+         <P>HappyMad Principle</P>
+      </TD>
+      <TD>
+         <P><B><I>When a hard-to-track bug is finally tracked down,
+         the one who finds it experiences "happyMadness" that is
+         proportional to the time spent searching for the bug.
+         HappyMad is so named because the finder is happy that the
+         bug has been found, but mad that the bug existed and was
+         difficult to track down.</I></B></P>
+      </TD>
+   </TR>
+   <TR>
+      <TD WIDTH=206>
+         <P>Wrong Comments are Evil Principle</P>
+      </TD>
+      <TD>
+         <P>It's hard to keep comments valid. Things change, and when
+         they do we recompile our code to make the code work. When
+         the code works, we forget to update the comments. This is a
+         Bad Thing. <B><I>If comments are wrong, they are of little
+         value, since their content cannot be trusted.</I></B> Of
+         course some comment differences (different nomenclature for
+         the same variable, etc) are minor, but I&nbsp;think the goal
+         should still be to have the comments exactly match the code,
+         for "beautification" purposes.</P>
+      </TD>
+   </TR>
+</TABLE>
+</P>
+
+<P></P>
+</BODY>
+</HTML>

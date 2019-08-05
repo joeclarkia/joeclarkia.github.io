@@ -1,0 +1,62 @@
+<imfl>
+	<head
+	  title="Crazy Joe"
+	  author="Joe"
+	  copyright="©2001"
+	  timeformat="dd:hh:mm:ss.xyz"
+	  duration="23"
+	  bitrate="82000"
+	  width="512"
+	  height="384"
+	/>
+
+  <!-- Assign handle numbers to images -->
+  <image handle="1"  name="./Crazy-01.jpg" />
+  <image handle="2"  name="./Crazy-02.jpg" />
+  <image handle="3"  name="./Crazy-03.jpg" />
+  <image handle="4"  name="./Crazy-04.jpg" />
+  <image handle="5"  name="./Freaky-01.jpg" />
+  <image handle="6"  name="./Freaky-02.jpg" />
+  <image handle="7"  name="./Freaky-03.jpg" />
+  <image handle="8"  name="./Freaky-04.jpg" />
+  <image handle="9"  name="./Slow-01.jpg" />
+  <image handle="10"  name="./Slow-02.jpg" />
+  <image handle="11"  name="./Slow-03.jpg" />
+  <image handle="12"  name="./Slow-04.jpg" />
+  <image handle="13"  name="./Slow-05.jpg" />
+  <image handle="14"  name="./Java-01.jpg" />
+  <image handle="15"  name="./Java-02.jpg" />
+  <image handle="16"  name="./Java-03.jpg" />
+  <image handle="17"  name="./Java-04.jpg" />
+  <image handle="18" name="./JoePict.jpg" />
+/>
+  
+  <!-- These effects define the timeline of the presentation -->
+  <!-- "crazy" -->
+  <crossfade start="1.4"      duration="0.2" target="1"  aspect="true" />
+  <crossfade start="1.8"    duration="0.2" target="2"  aspect="true" />
+  <crossfade start="2.2"    duration="0.2" target="3"  aspect="true" />
+  <crossfade start="2.6"    duration="0.2" target="4"  aspect="true" />
+  
+  <!-- "freaky" --> 
+  <crossfade start="5.0"      duration="0.75" target="5"  aspect="true" />
+  <crossfade start="5.5"      duration="0.2" target="6"  aspect="true" />
+  <crossfade start="6.0"      duration="0.2" target="7"  aspect="true" />
+  <crossfade start="6.5"      duration="0.2" target="8"  aspect="true" />
+  
+  <!-- "slow" -->
+  <crossfade start="9"      duration="0.75" target="9"  aspect="true" />
+  <crossfade start="9.8"     duration="0.2" target="10"  aspect="true" />
+  <crossfade start="10.6"     duration="0.2" target="11"  aspect="true" />
+  <crossfade start="11.4"     duration="0.2" target="12"  aspect="true" />
+  <crossfade start="12"     duration="0.2" target="13"  aspect="true" />
+  
+  <!-- "java" -->
+  <crossfade start="14.6"     duration="0.75" target="14"  aspect="true" />
+  <crossfade start="15.5"     duration="0.2" target="15"  aspect="true" />
+  <crossfade start="16.4"     duration="0.2" target="16"  aspect="true" />
+  <crossfade start="17.2"     duration="0.2" target="17"  aspect="true" />
+  
+  <!-- "joe" -->
+  <crossfade start="20"     duration="1.2" target="18" aspect="true" />
+</imfl>

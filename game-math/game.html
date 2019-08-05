@@ -1,0 +1,80 @@
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<!-- defines the questions array -->
+<script type="text/javascript" src="data.js"></script>
+
+<script language="javascript">
+
+template = "<b>QUESTION</b><br><br><center><input type='text' id='response' onkeypress='javascript:searchKeyPress(event);'/> <input type='button' id='btn' value='OK' onclick='javascript:check(QID);'/>&nbsp;<input type='button' value='I Give Up' onclick='javascript:reveal(QID);'/></center>";
+
+function ask()
+{
+  total = questions.length;
+
+  id = Math.floor(Math.random() * total);  
+  ask_with_id(id);
+}
+
+function ask_with_id(id)
+{
+  html = template.replace(/QUESTION/g, questions[id]["q"]);
+  html = html.replace(/QID/g, id);
+  document.getElementById("content").innerHTML=html;
+  document.getElementById("response").focus();
+}
+
+function check(qid)
+{
+   txt = document.getElementById("response").value;
+   correct = questions[qid]["a"];
+   if (txt == correct)
+   {
+      result = "<font size=+1><b>Correct!</b></font> <p>The question was<p><font color=green>" + questions[qid]["q"] + "</font><p> and you correctly gave the answer as<p><font color=blue>" + questions[qid]["a"] + "<p><input type=button id='btn' value='Continue' onclick='javascript:ask();'>";
+   }
+   else
+   {
+      result = "Sorry! <input type=button id='btn' value='Retry' onclick='javascript:ask_with_id(" + qid + ");'>";
+   }
+   document.getElementById("content").innerHTML = "<center>" + result + "</center>";
+   document.getElementById("btn").focus();
+}
+
+function reveal(qid)
+{
+    str = "The question was<p><font color=green>" + questions[qid]["q"] + "</font><p>The correct answer is <font color=blue><b>" + questions[qid]["a"] + "</b></font>";
+    str = str + "<p><input type=button id='btn' value='Continue' onclick='javascript:ask();'>";
+    document.getElementById("content").innerHTML = "<center>" + str + "</center>";
+    document.getElementById("btn").focus();
+}
+
+function searchKeyPress(e)
+{
+   if (typeof e == 'undefined' && window.event) { e = window.event; }
+   if (e.keyCode == 13)
+   {
+      document.getElementById('btn').click();
+   }
+}
+
+function read_data(astr)
+{
+   for (lines in astr)
+   { 
+      parts = lines.split("~");
+      questions.append( {"q": parts[0], "a": parts[1]});
+   }
+}
+</script>
+
+</head>
+<body onload="javascript:ask();">
+
+<font color=green>A Really Simple Memorization Game For a Really Hard Subject</font>
+<hr>
+
+<div id="content"></div>
+</body>
+</html>

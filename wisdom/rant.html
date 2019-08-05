@@ -1,0 +1,96 @@
+<!--This file created 1/19/98 3:56 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Windows Networking is the Best Way to Waste Time
+   Ever</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+</HEAD>
+<BODY BGCOLOR="#C9CC85">
+
+<P><CENTER><B><FONT SIZE="+4" COLOR="#0000AF">The Rant</FONT></B>
+</CENTER></P>
+
+<P>1/19/98</P>
+
+<P>This is the tale of my attempt to install networking software for
+Windows 3.1 on a Power Mac 6116 DOS Compatible (running a 486DX2-66
+processor).</P>
+
+<P>---</P>
+
+<P>I began with a fresh Windows 3.1 and very little knowledge of how
+to proceed from there.  The documentation for networking that came
+with the DOS Compatibility Card was virtually nonexistent (shame on
+Apple), and so I had no idea what I was really trying to do.  I
+didn't know if Novell Netware was shareware or commercial (I still
+don't for sure), but I finally found it on their website and
+downloaded it.  Nowhere in any documentation did it say whether
+Netware Client was freeware or commercial (shame on Apple, who
+mentioned Netware, and on Novell, who didn't really specify what type
+of software it was).  I also downloaded a specialized version of
+Trumpet Winsock from my university, not really knowing if I'd need it
+or not.  I installed it, and still didn't know what I was doing with
+it (shame on my college for not providing much of any documentation
+on it).</P>
+
+<P>Well, like I said, I ran the installers on Winsock and Netware
+Client, but still (of course), I lacked Windows networking.  As I
+trudged through help file after help file, I saw many possible
+answers, and tried many of them, but none worked.  I eventually
+figured out (for myself -- none of the documentation actually said
+this) that I needed to load, in this order, the ethernet card driver
+(MACODI.COM for my DOS Compatible), the network software (Netware
+Client), the ODIPKT.COM file (which mysteriously was named
+ODIPKT2.COM, but of course the help files erroneously called it
+ODIPKT.COM for some stupid reason), and finally WINPKT.COM.
+Theoretically, once all these files were in the right order,
+everything would work fine.</P>
+
+<P>But of course an easy solution was unthinkable.  I did get the
+drivers to load in this order, but still nothing worked.  I then read
+some more, and saw that the text files NET.CFG, STARTNET.BAT, and
+probably AUTOEXEC.BAT needed to be tweaked.  But, of course, there
+was no mention of EXACTLY how to do this, or what parameters to put
+on the command lines, etc.  They gave examples of vectors and
+interrupts and a handful of other terms that didn't mean much, but no
+real clue as to how to do it on my own, with my particular setup.
+</P>
+
+<P>I figured out that I needed to load some driver such as ne1000 or
+ne2000 or some such thing, and the help files implied that such a
+file would be found in the network software folder (NWCLIENT for me).
+ But my NWCLIENT had no such file or subdirectory.  This is where I
+gave up.  I found a phone number for Novell and called them, only to
+find that it would cost me $200 to have them set up my system.
+(Shame on Novell for even mentioning such an outrageous price for
+performing a service that most likely would take 10 minutes for
+someone who knew exactly what to do!)  Earlier I had called Apple
+about the problem, but they were no help, either, since they no
+longer give telephone support, at least not for free (The phone
+number -- 1-800-SOS-APPL   -- seems now to be a joke, since you can't
+get help by calling it -- shame on Apple for their total lack of free
+customer support.)</P>
+
+<P>I really wonder why I care about this stupid Windows networking.
+At the beginning of my college career, when I first hooked my 6100 up
+to the campus Ethernet, I installed Open Transport, turned it on, and
+-- IT WORKED!!!  THE FIRST TIME!!!  No messing with stupid text
+files.  I wouldn't have minded messing with IP addresses and such,
+but I didn't even have to do that.  (Thanks Apple for making decent
+software, unlike some other companies.)</P>
+
+<P>So perhaps someday, when I am even more foolish and willing to
+waste more than 12 hours on a project that shouldn't take more than
+one, I'll attempt Windows networking again.  Or maybe someday there
+will actually be someone who can write a decent help file or
+technical support document.  Until then, I guess I'll just stick with
+the MacOS networking, since it actually works when you turn it on.
+</P>
+
+<P>If I've offended any party, well, that's too bad.  You fight with
+your computer for 6 hours and not accomplish anything sometime and
+see if you're a happy camper.</P>
+
+<P>- Joe Clark (joeclark@iastate.edu)</P>
+</BODY>
+</HTML>

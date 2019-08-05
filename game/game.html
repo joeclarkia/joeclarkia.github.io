@@ -1,0 +1,80 @@
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<!-- defines the questions array -->
+<script type="text/javascript" src="data.js"></script>
+
+<script language="javascript">
+
+template = "<center><b>QUESTION</b></CENTER><br><br><input type='text' id='response' onkeypress='javascript:searchKeyPress(event);'/> <input type='button' id='btn' value='click' onclick='javascript:check(QID);'/><input type='button' value='I Give Up' onclick='javascript:reveal(QID);'/>";
+
+function ask()
+{
+  total = questions.length;
+
+  id = Math.floor(Math.random() * total);  
+  ask_with_id(id);
+}
+
+function ask_with_id(id)
+{
+  html = template.replace(/QUESTION/g, questions[id]["q"]);
+  html = html.replace(/QID/g, id);
+  document.getElementById("content").innerHTML=html;
+  document.getElementById("response").focus();
+}
+
+function check(qid)
+{
+   txt = document.getElementById("response").value;
+   correct = questions[qid]["a"];
+   if (txt == correct)
+   {
+      result = "Correct! <input type=button id='btn' value='Continue' onclick='javascript:ask();'>";
+   }
+   else
+   {
+      result = "Sorry! <input type=button id='btn' value='Retry' onclick='javascript:ask_with_id(" + qid + ");'>";
+   }
+   document.getElementById("content").innerHTML = result;
+   document.getElementById("btn").focus();
+}
+
+function reveal(qid)
+{
+    str = "correct answer is <font color=blue><b>" + questions[qid]["a"] + "</b></font>";
+    str = str + " <input type=button id='btn' value='Continue' onclick='javascript:ask();'>";
+    document.getElementById("content").innerHTML = str;
+    document.getElementById("btn").focus();
+}
+
+function searchKeyPress(e)
+{
+   if (typeof e == 'undefined' && window.event) { e = window.event; }
+   if (e.keyCode == 13)
+   {
+      document.getElementById('btn').click();
+   }
+}
+
+function read_data(astr)
+{
+   for (lines in astr)
+   { 
+      parts = lines.split("~");
+      questions.append( {"q": parts[0], "a": parts[1]});
+   }
+}
+</script>
+
+</head>
+<body onload="javascript:ask();">
+
+<font color=green>A Really Simple Bible Trivia Game by Joe</font>
+<hr>
+
+<center><div id="content"></div></center>
+</body>
+</html>
